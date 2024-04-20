@@ -1,14 +1,9 @@
 'use client';
-
+import Image from 'next/image'
 import {
 	NavigationMenu,
-	NavigationMenuContent,
 	NavigationMenuIndicator,
-	NavigationMenuItem,
-	NavigationMenuLink,
 	NavigationMenuList,
-	NavigationMenuTrigger,
-	NavigationMenuViewport,
 } from "@/components/ui/navigation-menu"
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react"
@@ -19,7 +14,7 @@ import { usePathname } from "next/navigation";
 const MenuItem = ({ label, href, active }:
 	Readonly<{ label: string, href: string, active: string }>) => {
 
-	const isActive = useMemo(() => { return active == href }, [active, href])
+	const isActive = useMemo(() => { return active.startsWith(href) }, [active, href])
 
 	return (
 		<Link href={href} legacyBehavior passHref>
@@ -40,7 +35,8 @@ const Menu = () => {
 	}
 	const navs: Nav[] = [
 		{ label: 'Home', href: '/' },
-		{ label: 'Blogs', href: '/blogs' }
+		{ label: 'Blogs', href: '/blogs' },
+		{ label: 'Notes', href: '/notes' }
 	]
 
 
@@ -49,8 +45,19 @@ const Menu = () => {
 
 	return (
 		<NavigationMenu orientation="vertical" >
-			<NavigationMenuList className="flex-col items-start space-x-0 space-y-2">
-				{navs.map(n => (<MenuItem key={n.label} {...n} active={path} />))}
+			<NavigationMenuList className="flex-row space-x-2 sm:flex-col sm:items-start sm:space-x-0 sm:space-y-2">
+				<Image
+					src="/chinmoku.png"
+					width={100}
+					height={40}
+					alt="Picture of the author"
+					className='mr-2 sm:mb-4 sm:mr-0'
+				/>
+				{
+					navs.map(n => (
+						<MenuItem key={n.label} {...n} active={path} />
+					))
+				}
 			</NavigationMenuList>
 			<NavigationMenuIndicator />
 		</NavigationMenu>
