@@ -22,7 +22,9 @@ const BlogCard = ({ detail }: Readonly<{ detail: Partial<BlogInfo> }>) => {
 	return (
 		<Card className="border-transparent shadow-none hover:border-gray-200">
 			<CardHeader className="p-4 space-y-1">
-				<div className='text-foreground/40 font-light text-xs'>{date}</div>
+				<motion.div layoutId={`blog-${title}-date`} transition={transition}>
+					<div className='text-foreground/40 font-light text-xs'>{date}</div>
+				</motion.div>
 				<motion.div layoutId={`blog-${title}-title`} transition={transition}>
 					<CardTitle className="font-semibold text-2xl">{title}</CardTitle>
 				</motion.div>
