@@ -1,7 +1,7 @@
 import { Metadata, ResolvingMetadata } from "next"
 
 type Props = {
-	params: { slug: string, }
+	params: { id: string, }
 	searchParams: { [key: string]: string | string[] | undefined }
 }
 export async function generateMetadata(
@@ -9,10 +9,8 @@ export async function generateMetadata(
 	parent: ResolvingMetadata
 ): Promise<Metadata> {
 
-
-
-	const { slug } = params
-	const title = decodeURIComponent(slug.replace('/blogs/', ''))
+	const { id } = params
+	const title = decodeURIComponent(id.replace('/blogs/', ''))
 	return {
 		title: title + ' - chinmoku'
 	}

@@ -14,6 +14,8 @@ import { BlogInfo } from "@/types/blogs"
 import { shorten } from "@/lib/string"
 import Link from 'next/link'
 import { cn } from "@/lib/utils"
+import { transition } from "@/lib/transition"
+import { motion } from "framer-motion"
 
 const BlogCard = ({ detail }: Readonly<{ detail: Partial<BlogInfo> }>) => {
 	const { title, description, date, tags } = detail
@@ -21,7 +23,9 @@ const BlogCard = ({ detail }: Readonly<{ detail: Partial<BlogInfo> }>) => {
 		<Card className="border-transparent shadow-none hover:border-gray-200">
 			<CardHeader className="p-4 space-y-1">
 				<div className='text-foreground/40 font-light text-xs'>{date}</div>
-				<CardTitle className="font-semibold text-2xl">{title}</CardTitle>
+				<motion.div layoutId={`blog-${title}-title`} transition={transition}>
+					<CardTitle className="font-semibold text-2xl">{title}</CardTitle>
+				</motion.div>
 			</CardHeader>
 			{description &&
 				<CardContent className={cn("px-4 py-0", !tags && 'pb-4')} >
