@@ -6,7 +6,7 @@ const Blogs = () => {
 
 
 
-	return <div className='p-4 space-y-2'>
+	return <div className='sm:p-4 space-y-2'>
 		{
 			fakeBlogs.map((b, i) => (
 				<Link key={i} href={'/blogs/' + encodeURIComponent(b.title)} className="block">

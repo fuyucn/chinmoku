@@ -16,6 +16,7 @@ import Link from 'next/link'
 import { cn } from "@/lib/utils"
 import { transition } from "@/lib/transition"
 import { motion } from "framer-motion"
+import BlogTags from "./blog/BlogTags"
 
 const BlogCard = ({ detail }: Readonly<{ detail: Partial<BlogInfo> }>) => {
 	const { title, description, date, tags } = detail
@@ -26,7 +27,7 @@ const BlogCard = ({ detail }: Readonly<{ detail: Partial<BlogInfo> }>) => {
 					<div className='text-foreground/40 font-light text-xs'>{date}</div>
 				</motion.div>
 				<motion.div layoutId={`blog-${title}-title`} transition={transition}>
-					<CardTitle className="font-semibold text-2xl">{title}</CardTitle>
+					<CardTitle className="font-medium text-2xl">{title}</CardTitle>
 				</motion.div>
 			</CardHeader>
 			{description &&
@@ -37,7 +38,7 @@ const BlogCard = ({ detail }: Readonly<{ detail: Partial<BlogInfo> }>) => {
 			{tags &&
 				<CardFooter className="p-4 pt-2">
 					<div className="space-x-2">
-						{tags?.map((tag, i) => (<Badge text={tag} key={tag + i} />))}
+						<BlogTags tags={tags} />
 					</div>
 				</CardFooter>
 			}

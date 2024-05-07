@@ -1,3 +1,4 @@
+import SubMenu from "@/components/SubMenu"
 import { Metadata, ResolvingMetadata } from "next"
 
 type Props = {
@@ -19,7 +20,10 @@ export async function generateMetadata(
 const BlogDetailsLayout = ({ children }: Readonly<{
 	children: React.ReactNode;
 }>) => {
-	return <>{children}</>
+	return <>
+		<SubMenu />
+		{children}
+	</>
 }
 
 export default BlogDetailsLayout

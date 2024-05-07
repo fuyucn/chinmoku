@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { usePathname } from "next/navigation"
 import { Metadata, ResolvingMetadata } from "next/types";
 import { fakeBlogs } from "../fake";
+import BlogTags from "@/components/blog/BlogTags";
 
 
 
@@ -19,18 +20,20 @@ const BlogDetail = () => {
 	}
 
 	return (
-		<div className="p-4">
-			<span className="block text-wrap break-all" >details: {pathName}</span>
+		<div className="sm:p-4">
 			<div className="mt-4">
 				<motion.div layoutId={`blog-${title}-title`} transition={transition}>
-					<h2 className="leading-snug font-semibold text-2xl">{blog.title}</h2>
+					<h2 className="leading-snug font-medium text-2xl mb-2">{blog.title}</h2>
 				</motion.div>
-				<motion.div layoutId={`blog-${title}-date`} transition={transition}>
-					<div className='text-foreground/40 font-light text-xs'>{blog.date}</div>
-				</motion.div>
+				<div className="flex items-center">
+					<motion.div layoutId={`blog-${title}-date`} transition={transition}>
+						<div className='text-foreground/40 font-light text-xs mr-3'>{blog.date}</div>
+					</motion.div>
+					<div>{blog.tags && <BlogTags tags={blog.tags} />}</div>
+				</div>
 
 				<div id='content'>
-
+					...
 				</div>
 			</div>
 		</div>
