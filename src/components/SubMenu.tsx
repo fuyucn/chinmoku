@@ -11,7 +11,7 @@ const SubMenu = () => {
 		router.back()
 	}
 	return (
-		<div className="flex sm:mx-4">
+		<div className="flex sm:mx-4 mb-4">
 			<a
 				className='font-mono cursor-pointer'
 				onClick={goBack}>

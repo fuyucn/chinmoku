@@ -1,39 +1,38 @@
-'use client'
+'use server'
 
-import { transition } from "@/lib/transition";
-import { motion } from "framer-motion";
-import { usePathname } from "next/navigation"
-import { Metadata, ResolvingMetadata } from "next/types";
-import { fakeBlogs } from "../fake";
-import BlogTags from "@/components/blog/BlogTags";
+import { cn } from "@/lib/utils";
+import BlogTitle from '@/components/blog/Title'
+import BlogMeta from "@/components/blog/BlogMeta";
+
+// This gets called on every request
+async function getData(id: string) {
+	// Fetch data from external API
+	const url = `${process.env.HOST}/api/md/${id}`
+	const res = await fetch(url)
+	const data = await res.json()
+	return data
+}
 
 
+const BlogDetail = async ({ params }: { params: { id: string } }) => {
+	// const pathName = usePathname()
 
-const BlogDetail = () => {
-	const pathName = usePathname()
+	// const title = decodeURIComponent(pathName.replace('/blogs/', ''))
+	const title = 'fake'
+	const { data, content } = await getData(params.id)
+	console.log('333', params)
 
-	const title = decodeURIComponent(pathName.replace('/blogs/', ''))
-
-	const blog = fakeBlogs.find(b => b.title === title)
-	if (!blog) {
+	if (!data) {
 		return <div className="p-4">EMPTY</div>
 	}
 
 	return (
-		<div className="sm:p-4">
+		<div className={cn("sm:p-4", 'bg-white border-transparent rounded-md')}>
 			<div className="mt-4">
-				<motion.div layoutId={`blog-${title}-title`} transition={transition}>
-					<h2 className="leading-snug font-medium text-2xl mb-2">{blog.title}</h2>
-				</motion.div>
-				<div className="flex items-center">
-					<motion.div layoutId={`blog-${title}-date`} transition={transition}>
-						<div className='text-foreground/40 font-light text-xs mr-3'>{blog.date}</div>
-					</motion.div>
-					<div>{blog.tags && <BlogTags tags={blog.tags} />}</div>
-				</div>
-
+				<BlogTitle key={title} title={data.title} />
+				<BlogMeta key={title} {...data} />
 				<div id='content'>
-					...
+					{content}
 				</div>
 			</div>
 		</div>
