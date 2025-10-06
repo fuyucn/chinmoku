@@ -6,7 +6,7 @@ const postsDirectory = join(process.cwd() + '/src', "mdx")
 
 export const fetchCache = 'default-no-store'
 
-export async function GET(req: Request, res: Response) {
+export async function GET(req: NextRequest) {
 	console.log("DEBUG!!")
 	// const ret = readMd('test')
 	const allFiles = loadAllContents()

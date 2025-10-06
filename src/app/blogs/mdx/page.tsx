@@ -20,8 +20,15 @@ async function getData() {
 export default async function Page() {
 	const ContentMeta = await getData()
 	console.log('page', ContentMeta)
-	const { data: parsedData } = ContentMeta
+
+	if (!ContentMeta || ContentMeta.length === 0) {
+		return <div className="p-4">No content available</div>
+	}
+
+	const firstContent = ContentMeta[0]
+	const { data: parsedData } = firstContent
 	const { title, date, tags, author } = parsedData
+
 	return <>
 		<div className={cn("sm:p-4", 'bg-white border-transparent rounded-md')}>
 			<div className="mt-4">

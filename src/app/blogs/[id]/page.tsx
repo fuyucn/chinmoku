@@ -14,9 +14,9 @@ async function getData(id: string) {
 }
 
 
-const BlogDetail = async ({ params }: { params: { id: string } }) => {
+const BlogDetail = async (props: { params: Promise<{ id: string }> }) => {
 	// const pathName = usePathname()
-
+	const params = await props.params
 	// const title = decodeURIComponent(pathName.replace('/blogs/', ''))
 	const title = 'fake'
 	const { data, content } = await getData(params.id)

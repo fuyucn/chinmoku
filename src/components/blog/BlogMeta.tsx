@@ -6,7 +6,7 @@ import { ContentMeta } from "@/types/blogs"
 
 import { format } from 'date-fns'
 
-export default (
+const BlogMeta = (
 	{ tags, date, key }:
 		{ tags?: ContentMeta["tags"], date: string, key: string }
 ) => {
@@ -17,3 +17,7 @@ export default (
 		<div>{tags && <BlogTags tags={tags} />}</div>
 	</div>
 }
+
+BlogMeta.displayName = 'BlogMeta'
+
+export default BlogMeta

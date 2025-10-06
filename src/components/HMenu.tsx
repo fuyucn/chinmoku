@@ -16,7 +16,7 @@ const style = {
 const HMenu = () => {
 	const path = usePathname()
 	const [hoverTab, setHoverTab] = useState<string>()
-	const timeoutRef = useRef<any>()
+	const timeoutRef = useRef<any>(null)
 
 	const isActive = (href: string) => {
 		if (href === '/') {

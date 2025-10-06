@@ -1,16 +1,12 @@
 import SubMenu from "@/components/SubMenu"
-import { Metadata, ResolvingMetadata } from "next"
+import { Metadata } from "next"
 
-type Props = {
-	params: { id: string, }
-	searchParams: { [key: string]: string | string[] | undefined }
-}
-export async function generateMetadata(
-	{ params, searchParams }: Props,
-	parent: ResolvingMetadata
-): Promise<Metadata> {
-
-	const { id } = params
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ id: string }>
+}): Promise<Metadata> {
+	const { id } = await params
 	const title = decodeURIComponent(id.replace('/blogs/', ''))
 	return {
 		title: title + ' - chinmoku'
