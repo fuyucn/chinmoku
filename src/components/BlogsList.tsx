@@ -1,14 +1,14 @@
-import { BlogInfo } from "@/types/blogs"
+import { ContentMeta } from "@/types/blogs"
 import Badge from "./Badge"
 
 
 
-const fake: Partial<BlogInfo>[] = [
+const fake: Partial<ContentMeta>[] = [
 	{ title: '1', date: " April 9, 2024", tags: ['asd'] },
 	{ title: '2', date: " April 9, 2024" },
 ]
 
-const BlogsList = ({ details = fake }: Readonly<{ details?: Partial<BlogInfo>[] }>) => {
+const BlogsList = ({ details = fake }: Readonly<{ details?: Partial<ContentMeta>[] }>) => {
 
 	return (
 		<div>

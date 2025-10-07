@@ -10,21 +10,22 @@ import {
 	CardTitle,
 } from "@/components/ui/card"
 import Badge from "./Badge"
-import { BlogInfo } from "@/types/blogs"
+import { ContentMeta } from "@/types/blogs"
 import { shorten } from "@/lib/string"
 import Link from 'next/link'
 import { cn } from "@/lib/utils"
 import { transition } from "@/lib/transition"
 import { motion } from "framer-motion"
 import BlogTags from "./blog/BlogTags"
+import { format } from "date-fns"
 
-const BlogCard = ({ detail }: Readonly<{ detail: Partial<BlogInfo> }>) => {
+const BlogCard = ({ detail }: Readonly<{ detail: Partial<ContentMeta> }>) => {
 	const { title, description, date, tags } = detail
 	return (
 		<Card className="border-transparent shadow-none hover:border-gray-200">
 			<CardHeader className="p-4 space-y-1">
 				<motion.div layoutId={`blog-${title}-date`} transition={transition}>
-					<div className='text-foreground/40 font-light text-xs'>{date}</div>
+					<div className='text-foreground/40 font-light text-xs'>{format(date as string, 'MM/dd/yyyy')}</div>
 				</motion.div>
 				<motion.div layoutId={`blog-${title}-title`} transition={transition}>
 					<CardTitle className="font-medium text-2xl">{title}</CardTitle>

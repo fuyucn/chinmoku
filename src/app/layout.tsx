@@ -4,6 +4,7 @@ import "@/styles/globals.css";
 import Menu from "@/components/Menu.tsx";
 import HMenu from "@/components/HMenu";
 import { euclidFont } from '@/lib/fonts'
+import { cn } from "@/lib/utils";
 
 
 // const inter = Inter({ subsets: ["latin"] });
@@ -19,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={euclidFont.className}>
+      <body className={cn(euclidFont.className, 'bg-slate-50')}>
         <div className="min-h-screen flex-1 w-full flex flex-col justify-stretch">
           {/* <HMenu /> */}
           <div className="flex-1 items-stretch content-between w-full justify-between p-4 text-sm flex flex-col sm:flex-row">
