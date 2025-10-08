@@ -1,18 +1,27 @@
 import BlogCard from "@/components/BlogCard"
 import Link from "next/link"
-import { fakeBlogs } from "./fake"
 import { Content } from "@/types/blogs"
 import { compareDesc } from "date-fns"
 
 const getAllBlock = async () => {
-	const url = `${process.env.HOST}/api/md`
-	const res = await fetch(url, {
-		next: {
-			revalidate: 1
+	try {
+		const res = await fetch('/api/md', {
+			next: {
+				revalidate: 1
+			}
+		})
+
+		if (!res.ok) {
+			console.error(`Failed to fetch blogs: ${res.status} ${res.statusText}`)
+			return []
 		}
-	})
-	const data: Content[] = await res.json()
-	return data
+
+		const data: Content[] = await res.json()
+		return data.sort((a, b) => compareDesc(new Date(a.data.date), new Date(b.data.date)))
+	} catch (error) {
+		console.error('Error fetching blogs:', error)
+		return []
+	}
 }
 
 const Blogs = async () => {
