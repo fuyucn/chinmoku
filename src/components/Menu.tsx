@@ -20,16 +20,14 @@ const MenuItem = ({ label, href, active }:
 	}, [active, href])
 
 	return (
-		<Link href={href} legacyBehavior passHref>
-			<div className='relative w-full text-[14px] leading-4'>
-				<a className={cn('transition-colors cursor-pointer hover:text-foreground/80 ',
-					"text-foreground/60", isActive && "text-foreground")}
-				>
-					{label}
-				</a>
-				{isActive && <motion.div layoutId={'nav-active'}
-					className='absolute right-0 top-0 h-full w-[2px] bg-black bg-foreground/80' />}
-			</div>
+		<Link href={href} className='relative w-full text-[14px] leading-4'>
+			<span className={cn('transition-colors cursor-pointer hover:text-foreground/80 ',
+				"text-foreground/60", isActive && "text-foreground")}
+			>
+				{label}
+			</span>
+			{isActive && <motion.div layoutId={'nav-active'}
+				className='absolute right-0 top-0 h-full w-[2px] bg-black bg-foreground/80' />}
 		</Link>
 	)
 }
