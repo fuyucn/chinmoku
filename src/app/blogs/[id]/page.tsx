@@ -1,26 +1,12 @@
-'use server'
-
 import { cn } from "@/lib/utils";
 import BlogTitle from '@/components/blog/Title'
 import BlogMeta from "@/components/blog/BlogMeta";
-
-// This gets called on every request
-async function getData(id: string) {
-	// Fetch data from external API
-	const url = `${process.env.HOST}/api/md/${id}`
-	const res = await fetch(url)
-	const data = await res.json()
-	return data
-}
+import { loadContent } from "@/lib/content";
 
 
 const BlogDetail = async (props: { params: Promise<{ id: string }> }) => {
-	// const pathName = usePathname()
 	const params = await props.params
-	// const title = decodeURIComponent(pathName.replace('/blogs/', ''))
-	const title = 'fake'
-	const { data, content } = await getData(params.id)
-	console.log('333', params)
+	const { data, content } = loadContent(params.id)
 
 	if (!data) {
 		return <div className="p-4">EMPTY</div>
@@ -29,8 +15,8 @@ const BlogDetail = async (props: { params: Promise<{ id: string }> }) => {
 	return (
 		<div className={cn("sm:p-4", 'bg-white border-transparent rounded-md')}>
 			<div className="mt-4">
-				<BlogTitle key={title} title={data.title} />
-				<BlogMeta key={title} {...data} />
+				<BlogTitle title={data.title} />
+				<BlogMeta {...data} />
 				<div id='content'>
 					{content}
 				</div>
